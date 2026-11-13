@@ -1,0 +1,774 @@
+// Hand-authored lesson content for flagship subtopics (one per major unit, per grade).
+// Keyed by subtopic id (see gen-syllabus.mjs for id scheme: g{grade}-u{unit}-{slug}).
+// `visual` uses the shared diagram component types rendered by frontend/src/components/Visual.tsx:
+//   shape | tape | percent-grid | fraction-bars | number-line | coordinate-plane | circle | angle | solid | pythagoras | dot-plot
+// Practice questions: { prompt, choices?, answer, hint } — numeric/text answers are compared case/whitespace-insensitively.
+
+export const overrides = {
+  "g6-u1-parallelograms": {
+    explanation:
+      "A parallelogram is like a rectangle that's been pushed sideways — think of a slanted picture frame or the shape of a cut piece of bread in some bakeries. Even though it's slanted, its area formula is just as simple as a rectangle's: multiply the base by the height. The trick is that the \"height\" isn't the slanted side — it's the straight-up distance between the base and the opposite side, like measuring a wall's height with a plumb line instead of a diagonal ruler.",
+    example: {
+      steps: [
+        "Identify the base of the parallelogram: b = 8 cm.",
+        "Identify the height — the perpendicular distance to the opposite side, NOT the slanted side: h = 5 cm.",
+        "Apply the formula: Area = base × height.",
+        "Area = 8 cm × 5 cm = 40 cm².",
+      ],
+    },
+    visual: { type: "shape", props: { shape: "parallelogram", base: 8, height: 5, unit: "cm" } },
+    practice: [
+      {
+        prompt: "A parallelogram has a base of 10 m and a height of 4 m. What is its area?",
+        answer: "40",
+        hint: "Area of a parallelogram = base × height. Multiply 10 by 4.",
+      },
+      {
+        prompt: "A parallelogram has an area of 36 cm² and a base of 6 cm. What is its height?",
+        answer: "6",
+        hint: "Rearrange the formula: height = Area ÷ base.",
+      },
+      {
+        prompt: "True or false: the height of a parallelogram can be measured along its slanted side.",
+        choices: ["True", "False"],
+        answer: "False",
+        hint: "Height is always the straight, perpendicular distance between the base and the opposite side.",
+      },
+    ],
+  },
+
+  "g6-u2-what-are-ratios": {
+    explanation:
+      "A ratio compares two quantities by division — it tells you how many of one thing there are for every so-many of another. If a fruit punch recipe uses 2 cups of juice for every 3 cups of soda, the ratio of juice to soda is 2:3. That doesn't mean there are only 5 cups total — it means that relationship stays the same no matter how big a batch you make: 4 cups juice to 6 cups soda is the same ratio, just doubled.",
+    example: {
+      steps: [
+        "A recipe calls for 2 cups of flour for every 5 cups of water.",
+        "Write the ratio of flour to water: 2:5.",
+        "To make a bigger batch, scale both numbers by the same factor, e.g. ×3.",
+        "New ratio: (2×3):(5×3) = 6:15 — still the same relationship, just a bigger batch.",
+      ],
+    },
+    visual: { type: "tape", props: { labelA: "Flour", labelB: "Water", a: 2, b: 5 } },
+    practice: [
+      {
+        prompt: "A ratio of red to blue marbles is 3:4. If there are 12 red marbles, how many blue marbles are there?",
+        answer: "16",
+        hint: "12 is 4 times 3, so multiply the blue amount (4) by the same factor.",
+      },
+      {
+        prompt: "Write the ratio '5 apples for every 2 oranges' using a colon.",
+        answer: "5:2",
+        hint: "Order matters — apples come first since they're mentioned first.",
+      },
+      {
+        prompt: "Which ratio is equivalent to 2:3?",
+        choices: ["4:5", "4:6", "6:8"],
+        answer: "4:6",
+        hint: "Multiply both numbers in 2:3 by the same factor.",
+      },
+    ],
+  },
+
+  "g6-u3-percentages": {
+    explanation:
+      "A percentage is just a ratio out of 100 — \"percent\" literally means \"per hundred.\" If you get 85% on a test, that means 85 out of every 100 points were correct. Picture a 10-by-10 grid of 100 squares: shading 85 of them shows exactly what 85% looks like. This is why percentages are so useful for comparing things fairly, like comparing scores on tests with different numbers of questions.",
+    example: {
+      steps: [
+        "A shirt normally costs $40 and is 25% off.",
+        "Convert the percent to a decimal: 25% = 0.25.",
+        "Multiply to find the discount: 0.25 × $40 = $10.",
+        "Subtract from the original price: $40 − $10 = $30 sale price.",
+      ],
+    },
+    visual: { type: "percent-grid", props: { percent: 25 } },
+    practice: [
+      {
+        prompt: "What is 50% of 80?",
+        answer: "40",
+        hint: "50% means half — divide 80 by 2.",
+      },
+      {
+        prompt: "20 out of 25 questions correct is what percent?",
+        answer: "80",
+        hint: "Divide 20 by 25, then multiply by 100.",
+      },
+      {
+        prompt: "A $60 jacket is marked up 10%. What is the new price?",
+        answer: "66",
+        hint: "Find 10% of 60, then add it to 60.",
+      },
+    ],
+  },
+
+  "g6-u4-meaning-of-fraction-division": {
+    explanation:
+      "Dividing by a fraction answers the question: \"how many of that fraction fit into this amount?\" If you have 3 pizzas and each person gets 1/2 a pizza, dividing 3 ÷ 1/2 tells you how many people can be served — and the answer, 6, makes sense because a half fits into a whole pizza twice, so 3 wholes fit it 6 times. Thinking in terms of \"how many groups\" makes fraction division feel like real slicing instead of a mystery rule.",
+    example: {
+      steps: [
+        "You have 4 cups of trail mix. Each snack bag holds 2/3 cup.",
+        "Question: how many bags can you fill? That's 4 ÷ 2/3.",
+        "Picture 4 wholes, each cut into thirds: that's 12 thirds total.",
+        "Each bag needs 2 thirds, so 12 ÷ 2 = 6 bags.",
+      ],
+    },
+    visual: { type: "fraction-bars", props: { whole: 4, pieceNumerator: 2, pieceDenominator: 3 } },
+    practice: [
+      {
+        prompt: "How many 1/4-cup servings fit into 2 cups?",
+        answer: "8",
+        hint: "Think: 2 ÷ 1/4. Each whole cup has 4 quarters, and you have 2 wholes.",
+      },
+      {
+        prompt: "Compute: 5 ÷ 1/2",
+        answer: "10",
+        hint: "Every whole has 2 halves in it. Multiply 5 by 2.",
+      },
+      {
+        prompt: "Which expression means 'how many 2/3s fit into 6'?",
+        choices: ["6 × 2/3", "6 ÷ 2/3", "2/3 ÷ 6"],
+        answer: "6 ÷ 2/3",
+        hint: "Division asks 'how many groups of the second number fit into the first.'",
+      },
+    ],
+  },
+
+  "g6-u5-multiplying-decimals": {
+    explanation:
+      "Multiplying decimals works just like multiplying whole numbers — you just have to keep track of the decimal point at the end. A handy trick: ignore the decimal points, multiply the numbers as if they were whole, then count how many total decimal places were in both original numbers and place the point that many spots from the right. It's like multiplying money amounts in cents instead of dollars, then converting back.",
+    example: {
+      steps: [
+        "Multiply 2.3 × 1.4.",
+        "Ignore decimals for a moment: 23 × 14 = 322.",
+        "Count decimal places in the original numbers: 2.3 has 1, 1.4 has 1 → total of 2.",
+        "Place the decimal point 2 digits from the right in 322: 3.22.",
+      ],
+    },
+    visual: { type: "shape", props: { shape: "rectangle", base: 2.3, height: 1.4, unit: "units", showGrid: true } },
+    practice: [
+      {
+        prompt: "Compute: 0.5 × 0.6",
+        answer: "0.3",
+        hint: "5 × 6 = 30. Count 2 total decimal places, so the answer is 0.30.",
+      },
+      {
+        prompt: "Compute: 3.2 × 2",
+        answer: "6.4",
+        hint: "32 × 2 = 64. There's 1 decimal place total, so the answer is 6.4.",
+      },
+      {
+        prompt: "Compute: 1.1 × 1.1",
+        answer: "1.21",
+        hint: "11 × 11 = 121. There are 2 decimal places total.",
+      },
+    ],
+  },
+
+  "g6-u6-expressions-with-exponents": {
+    explanation:
+      "An exponent is shorthand for repeated multiplication. Instead of writing 3 × 3 × 3 × 3, you can write 3⁴ — the little 4 tells you how many times to multiply 3 by itself. It's like folding a piece of paper: each fold doubles the layers, so after 4 folds you don't have 4 layers, you have 2⁴ = 16 layers, because each fold multiplies the previous amount.",
+    example: {
+      steps: [
+        "Evaluate 2⁵.",
+        "This means 2 multiplied by itself 5 times: 2 × 2 × 2 × 2 × 2.",
+        "2 × 2 = 4, then 4 × 2 = 8, then 8 × 2 = 16, then 16 × 2 = 32.",
+        "So 2⁵ = 32.",
+      ],
+    },
+    visual: { type: "shape", props: { shape: "exponent-tower", base: 2, exponent: 5 } },
+    practice: [
+      {
+        prompt: "Evaluate: 3³",
+        answer: "27",
+        hint: "3 × 3 × 3. First 3×3=9, then 9×3=27.",
+      },
+      {
+        prompt: "Evaluate: 10²",
+        answer: "100",
+        hint: "10 × 10.",
+      },
+      {
+        prompt: "Which expression equals 5 × 5 × 5 × 5?",
+        choices: ["4⁵", "5⁴", "5×4"],
+        answer: "5⁴",
+        hint: "The base is the repeated number (5); the exponent counts how many times it appears (4).",
+      },
+    ],
+  },
+
+  "g6-u7-the-coordinate-plane": {
+    explanation:
+      "The coordinate plane is like a map with two number lines crossing at a point called the origin (0,0). Every point gets an address written as (x, y): x tells you how far to go left or right, and y tells you how far to go up or down. Negative numbers just mean you go the opposite direction — left instead of right, or down instead of up — the same way a GPS can send you north or south.",
+    example: {
+      steps: [
+        "Plot the point (−3, 4).",
+        "Start at the origin (0, 0).",
+        "Move 3 units left (because x = −3 is negative).",
+        "Then move 4 units up (because y = 4 is positive). Mark the point there.",
+      ],
+    },
+    visual: { type: "coordinate-plane", props: { points: [{ x: -3, y: 4, label: "(-3, 4)" }] } },
+    practice: [
+      {
+        prompt: "Which quadrant is the point (5, -2) in? (Enter 1, 2, 3, or 4)",
+        answer: "4",
+        hint: "Positive x, negative y is the bottom-right quadrant, which is Quadrant 4.",
+      },
+      {
+        prompt: "What are the coordinates of the origin?",
+        answer: "(0,0)",
+        hint: "The origin is where both axes cross.",
+      },
+      {
+        prompt: "To plot (-2, -5), which directions do you move from the origin?",
+        choices: ["Left and up", "Right and down", "Left and down"],
+        answer: "Left and down",
+        hint: "Negative x means left; negative y means down.",
+      },
+    ],
+  },
+
+  "g6-u8-mean-and-mad": {
+    explanation:
+      "The mean (average) summarizes a whole data set with one number: add everything up and divide by how many values there are. But the mean alone doesn't tell you how spread out the data is — that's where MAD (Mean Absolute Deviation) comes in. MAD measures, on average, how far each data point is from the mean. A small MAD means the data points huddle close to the mean (like a basketball player who scores nearly the same every game); a large MAD means the data is scattered (a player who sometimes scores 2 points and sometimes 40).",
+    example: {
+      steps: [
+        "Data set: 4, 6, 8, 10, 12.",
+        "Find the mean: (4+6+8+10+12) ÷ 5 = 40 ÷ 5 = 8.",
+        "Find each distance from the mean: |4-8|=4, |6-8|=2, |8-8|=0, |10-8|=2, |12-8|=4.",
+        "Average those distances: (4+2+0+2+4) ÷ 5 = 12 ÷ 5 = 2.4. The MAD is 2.4.",
+      ],
+    },
+    visual: { type: "dot-plot", props: { values: [4, 6, 8, 10, 12], mean: 8 } },
+    practice: [
+      {
+        prompt: "Find the mean of: 2, 4, 6, 8.",
+        answer: "5",
+        hint: "Add them up (20) and divide by how many numbers there are (4).",
+      },
+      {
+        prompt: "If every value in a data set is identical, what is the MAD?",
+        answer: "0",
+        hint: "If there's no spread, every distance from the mean is zero.",
+      },
+      {
+        prompt: "A data set with values close together has a MAD that is...",
+        choices: ["Small", "Large", "Negative"],
+        answer: "Small",
+        hint: "MAD measures spread — tightly clustered data has little spread.",
+      },
+    ],
+  },
+
+  "g7-u1-scaled-copies": {
+    explanation:
+      "A scaled copy is a shape that's been stretched or shrunk, but keeps the exact same proportions — like zooming in on a photo without distorting it. Every length in the copy is multiplied by the same number, called the scale factor. If a scale factor is 2, every side doubles; if it's 1/2, every side is cut in half. Angles always stay the same, which is why a scaled copy looks identical in shape, just a different size.",
+    example: {
+      steps: [
+        "A rectangle has sides 3 cm and 5 cm.",
+        "Scale it by a factor of 2.",
+        "Multiply each side by 2: 3×2 = 6 cm, and 5×2 = 10 cm.",
+        "The scaled copy is a rectangle with sides 6 cm and 10 cm — same shape, twice as big.",
+      ],
+    },
+    visual: { type: "shape", props: { shape: "rectangle-pair", base: 3, height: 5, scale: 2, unit: "cm" } },
+    practice: [
+      {
+        prompt: "A triangle with a side of 4 cm is scaled by a factor of 3. What is the new side length?",
+        answer: "12",
+        hint: "Multiply the original length by the scale factor.",
+      },
+      {
+        prompt: "A shape with a 10 cm side is scaled down to 5 cm. What is the scale factor?",
+        answer: "0.5",
+        hint: "Scale factor = new length ÷ original length = 5 ÷ 10.",
+      },
+      {
+        prompt: "In a scaled copy, what happens to the angles?",
+        choices: ["They double", "They stay the same", "They become right angles"],
+        answer: "They stay the same",
+        hint: "Scaling changes size, not shape — angle measures are preserved.",
+      },
+    ],
+  },
+
+  "g7-u2-representing-proportional-relationships-with-graphs": {
+    explanation:
+      "When two quantities are proportional, their graph is always a straight line that passes through the origin (0,0). That's the giveaway to look for: if the line doesn't pass through (0,0), the relationship isn't truly proportional. The steepness of that line is the constant of proportionality — for example, if you earn $15/hour, the graph of earnings vs. hours is a line through the origin that rises $15 for every 1 hour across.",
+    example: {
+      steps: [
+        "A relationship is: cost = 3 × (number of tickets).",
+        "When tickets = 0, cost = 0 → the graph passes through (0, 0).",
+        "When tickets = 1, cost = 3 → plot the point (1, 3).",
+        "When tickets = 2, cost = 6 → plot (2, 6). Connecting the points gives a straight line through the origin.",
+      ],
+    },
+    visual: { type: "coordinate-plane", props: { points: [{ x: 0, y: 0 }, { x: 1, y: 3 }, { x: 2, y: 6 }], line: true } },
+    practice: [
+      {
+        prompt: "A proportional relationship's graph must always pass through which point?",
+        answer: "(0,0)",
+        hint: "This is the defining feature of a proportional graph.",
+      },
+      {
+        prompt: "If a graph of a proportional relationship passes through (2, 10), what is the constant of proportionality?",
+        answer: "5",
+        hint: "Constant of proportionality = y ÷ x = 10 ÷ 2.",
+      },
+      {
+        prompt: "A line that crosses the y-axis at (0, 4) instead of the origin represents a relationship that is...",
+        choices: ["Proportional", "Not proportional"],
+        answer: "Not proportional",
+        hint: "Proportional graphs must pass through the origin — this one doesn't.",
+      },
+    ],
+  },
+
+  "g7-u3-circumference-of-a-circle": {
+    explanation:
+      "The circumference is the distance all the way around a circle — like the length of string needed to wrap around a circular table. No matter the circle's size, if you divide its circumference by its diameter, you always get the same number: pi (π ≈ 3.14). That's where the formula comes from: Circumference = π × diameter, or equivalently, C = 2 × π × radius, since the diameter is twice the radius.",
+    example: {
+      steps: [
+        "A circular pizza has a diameter of 12 inches.",
+        "Use the formula: C = π × d.",
+        "C = π × 12 ≈ 3.14 × 12.",
+        "C ≈ 37.68 inches around the edge of the pizza.",
+      ],
+    },
+    visual: { type: "circle", props: { radius: 6, show: "diameter", unit: "in" } },
+    practice: [
+      {
+        prompt: "A circle has a radius of 5 cm. Using π ≈ 3.14, what is its circumference? (round to 1 decimal)",
+        answer: "31.4",
+        hint: "C = 2 × π × r = 2 × 3.14 × 5.",
+      },
+      {
+        prompt: "A circle has a diameter of 10 m. What is its circumference using π ≈ 3.14?",
+        answer: "31.4",
+        hint: "C = π × d = 3.14 × 10.",
+      },
+      {
+        prompt: "Circumference divided by diameter always equals approximately...",
+        choices: ["2", "3.14", "10"],
+        answer: "3.14",
+        hint: "That ratio is the definition of π.",
+      },
+    ],
+  },
+
+  "g7-u4-percent-increase-and-decrease": {
+    explanation:
+      "Percent increase or decrease compares how much something changed relative to where it started. If a $20 item goes up to $25, it didn't just go up $5 — it went up 25% of its original value, because $5 is 25% of $20. The key move is always to divide the change by the ORIGINAL amount, not the new amount, then convert to a percent.",
+    example: {
+      steps: [
+        "A video game originally costs $60 and is now on sale for $45.",
+        "Find the amount of change: $60 − $45 = $15 decrease.",
+        "Divide the change by the ORIGINAL price: $15 ÷ $60 = 0.25.",
+        "Convert to a percent: 0.25 = 25%. The price decreased by 25%.",
+      ],
+    },
+    visual: { type: "percent-grid", props: { percent: 25, decreasing: true } },
+    practice: [
+      {
+        prompt: "A $50 item increases to $60. What is the percent increase?",
+        answer: "20",
+        hint: "Change ÷ original = 10 ÷ 50, then convert to a percent.",
+      },
+      {
+        prompt: "A population drops from 200 to 150. What is the percent decrease?",
+        answer: "25",
+        hint: "Change ÷ original = 50 ÷ 200, then convert to a percent.",
+      },
+      {
+        prompt: "To find percent change, you always divide the change by the...",
+        choices: ["New amount", "Original amount", "Average of both"],
+        answer: "Original amount",
+        hint: "Percent change is always relative to where you started.",
+      },
+    ],
+  },
+
+  "g7-u5-adding-and-subtracting-rational-numbers": {
+    explanation:
+      "Adding and subtracting positive and negative numbers makes sense if you think of a number line as a path: positive numbers move you right, negative numbers move you left, and subtracting is the same as adding the opposite direction. Owing someone $5 is like being at −5; if you then earn $8, you move right 8 spots, landing at +3. This mental picture works for any combination of positives and negatives.",
+    example: {
+      steps: [
+        "Compute: −7 + 4.",
+        "Start at −7 on the number line.",
+        "Add 4 means move 4 units to the right.",
+        "−7 + 4 lands at −3.",
+      ],
+    },
+    visual: { type: "number-line", props: { start: -7, move: 4, result: -3 } },
+    practice: [
+      {
+        prompt: "Compute: -3 + 8",
+        answer: "5",
+        hint: "Start at -3 and move 8 units right.",
+      },
+      {
+        prompt: "Compute: 5 - 9",
+        answer: "-4",
+        hint: "Subtracting 9 means moving 9 units left from 5.",
+      },
+      {
+        prompt: "Compute: -6 - (-2)",
+        answer: "-4",
+        hint: "Subtracting a negative is the same as adding a positive: -6 + 2.",
+      },
+    ],
+  },
+
+  "g7-u6-inequalities": {
+    explanation:
+      "An inequality compares two expressions using symbols like < (less than), > (greater than), ≤, or ≥, instead of an equals sign. Solving one works almost exactly like solving an equation — except when you multiply or divide both sides by a NEGATIVE number, the inequality sign has to flip. Picture a number line: the solution isn't a single point but a whole ray of points, shown with an open circle (not included) or filled circle (included) and an arrow.",
+    example: {
+      steps: [
+        "Solve: −2x + 3 < 11.",
+        "Subtract 3 from both sides: −2x < 8.",
+        "Divide both sides by −2 — and FLIP the inequality sign since you divided by a negative: x > −4.",
+        "The solution is all numbers greater than −4, shown as an open circle at −4 with an arrow to the right.",
+      ],
+    },
+    visual: { type: "number-line", props: { inequality: { value: -4, direction: "greater", inclusive: false } } },
+    practice: [
+      {
+        prompt: "Solve for x: x + 5 > 9",
+        answer: "x>4",
+        hint: "Subtract 5 from both sides.",
+      },
+      {
+        prompt: "Solve for x: -3x < 12 (remember to flip the sign!)",
+        answer: "x>-4",
+        hint: "Divide both sides by -3, and flip the inequality sign because you divided by a negative.",
+      },
+      {
+        prompt: "When do you flip an inequality sign?",
+        choices: ["When adding a positive", "When dividing by a negative number", "Never"],
+        answer: "When dividing by a negative number",
+        hint: "Multiplying or dividing both sides by a negative reverses the direction of the inequality.",
+      },
+    ],
+  },
+
+  "g7-u7-angle-relationships": {
+    explanation:
+      "When lines cross, the angles they form follow predictable patterns. Complementary angles add up to 90°, supplementary angles add up to 180°, and vertical angles (the ones directly across from each other at an intersection) are always equal. These rules let you figure out a missing angle without measuring — if you know one angle and the relationship, you can calculate the rest.",
+    example: {
+      steps: [
+        "Two angles are supplementary, and one measures 125°.",
+        "Supplementary angles add up to 180°.",
+        "Set up the equation: 125° + x = 180°.",
+        "Solve: x = 180° − 125° = 55°.",
+      ],
+    },
+    visual: { type: "angle", props: { angleA: 125, relationship: "supplementary" } },
+    practice: [
+      {
+        prompt: "Two angles are complementary. One is 35°. What is the other?",
+        answer: "55",
+        hint: "Complementary angles add up to 90°.",
+      },
+      {
+        prompt: "Two vertical angles: one is 70°. What is the other?",
+        answer: "70",
+        hint: "Vertical angles are always equal.",
+      },
+      {
+        prompt: "Supplementary angles always add up to...",
+        choices: ["90°", "180°", "360°"],
+        answer: "180°",
+        hint: "Think of a straight line split into two angles.",
+      },
+    ],
+  },
+
+  "g7-u8-probabilities-of-single-step-events": {
+    explanation:
+      "Probability measures how likely something is to happen, as a number between 0 (impossible) and 1 (certain) — often written as a fraction, decimal, or percent. For a single simple event, like rolling a die or flipping a coin, probability is just: (number of favorable outcomes) ÷ (total number of possible outcomes). Rolling a 4 on a standard die has probability 1/6, because there's 1 favorable outcome out of 6 equally likely ones.",
+    example: {
+      steps: [
+        "A bag has 3 red marbles, 2 blue marbles, and 5 green marbles (10 total).",
+        "Question: what is the probability of pulling a blue marble?",
+        "Favorable outcomes: 2 (blue marbles). Total outcomes: 10.",
+        "Probability = 2/10 = 1/5 = 0.2 = 20%.",
+      ],
+    },
+    visual: { type: "shape", props: { shape: "probability-bag", items: [{ color: "red", count: 3 }, { color: "blue", count: 2 }, { color: "green", count: 5 }] } },
+    practice: [
+      {
+        prompt: "A standard die is rolled once. What is the probability of rolling a number greater than 4? (as a fraction like 1/3)",
+        answer: "1/3",
+        hint: "Numbers greater than 4 on a die: 5 and 6 — that's 2 out of 6 outcomes.",
+      },
+      {
+        prompt: "A coin is flipped once. What is the probability of landing on heads? (as a fraction)",
+        answer: "1/2",
+        hint: "There are 2 equally likely outcomes, and 1 is favorable.",
+      },
+      {
+        prompt: "Probability is always a number between...",
+        choices: ["-1 and 1", "0 and 1", "0 and 100"],
+        answer: "0 and 1",
+        hint: "0 means impossible, 1 means certain.",
+      },
+    ],
+  },
+
+  "g8-u1-rigid-transformations": {
+    explanation:
+      "A rigid transformation moves a shape without changing its size or shape — like sliding a puzzle piece, spinning it, or flipping it over, but never stretching it. The three types are: translation (sliding), rotation (turning around a point), and reflection (flipping across a line). Because nothing stretches or shrinks, the image (the moved shape) is always congruent to the original — same size, same angles, just in a different position.",
+    example: {
+      steps: [
+        "A triangle has a vertex at (2, 3).",
+        "Translate the whole triangle 4 units right and 1 unit down.",
+        "Add 4 to the x-coordinate: 2 + 4 = 6. Subtract 1 from the y-coordinate: 3 − 1 = 2.",
+        "The vertex moves to (6, 2) — and every other point of the triangle moves the same way, keeping the shape identical.",
+      ],
+    },
+    visual: { type: "coordinate-plane", props: { points: [{ x: 2, y: 3, label: "Original" }, { x: 6, y: 2, label: "Translated" }] } },
+    practice: [
+      {
+        prompt: "Which transformation flips a shape across a line?",
+        choices: ["Translation", "Rotation", "Reflection"],
+        answer: "Reflection",
+        hint: "Think of a mirror image.",
+      },
+      {
+        prompt: "A point at (3, 5) is translated 2 units left and 3 units up. What are the new coordinates? (format: (x,y))",
+        answer: "(1,8)",
+        hint: "Subtract 2 from x, add 3 to y.",
+      },
+      {
+        prompt: "After a rigid transformation, is the new shape congruent to the original?",
+        choices: ["Yes", "No"],
+        answer: "Yes",
+        hint: "Rigid transformations preserve size and shape — that's what makes them 'rigid.'",
+      },
+    ],
+  },
+
+  "g8-u2-slope": {
+    explanation:
+      "Slope measures how steep a line is — how much it rises (or falls) for every step you take to the right. It's calculated as \"rise over run\": the change in y divided by the change in x between two points. A slope of 2 means the line climbs 2 units for every 1 unit across; a negative slope means the line goes downhill as you move right. Think of it like the steepness of a ramp or a ski slope.",
+    example: {
+      steps: [
+        "Find the slope between points (1, 2) and (4, 11).",
+        "Change in y (rise): 11 − 2 = 9.",
+        "Change in x (run): 4 − 1 = 3.",
+        "Slope = rise/run = 9/3 = 3.",
+      ],
+    },
+    visual: { type: "coordinate-plane", props: { points: [{ x: 1, y: 2 }, { x: 4, y: 11 }], line: true, showSlopeTriangle: true } },
+    practice: [
+      {
+        prompt: "Find the slope between (0, 0) and (5, 10).",
+        answer: "2",
+        hint: "Slope = (change in y) / (change in x) = 10/5.",
+      },
+      {
+        prompt: "A line has a slope of -2. As x increases, what happens to y?",
+        choices: ["Increases", "Decreases", "Stays the same"],
+        answer: "Decreases",
+        hint: "A negative slope means the line falls as it moves right.",
+      },
+      {
+        prompt: "Find the slope between (2, 3) and (2, 9).",
+        answer: "undefined",
+        hint: "The run (change in x) is 0 — dividing by zero makes the slope undefined (a vertical line).",
+      },
+    ],
+  },
+
+  "g8-u3-representing-linear-relationships": {
+    explanation:
+      "A linear relationship can be written as an equation of the form y = mx + b, where m is the slope (steepness) and b is the y-intercept (where the line crosses the y-axis, i.e. the starting value when x = 0). This single equation lets you predict y for any x without drawing a graph — plug in x, do the arithmetic, and get y. It's the algebra version of the same straight-line pattern you see on a graph or in a table.",
+    example: {
+      steps: [
+        "A plant is 5 cm tall when planted and grows 2 cm every week.",
+        "Slope (growth rate) m = 2. Y-intercept (starting height) b = 5.",
+        "Write the equation: height = 2 × (weeks) + 5, or y = 2x + 5.",
+        "After 6 weeks: y = 2(6) + 5 = 12 + 5 = 17 cm tall.",
+      ],
+    },
+    visual: { type: "coordinate-plane", props: { points: [{ x: 0, y: 5 }, { x: 6, y: 17 }], line: true } },
+    practice: [
+      {
+        prompt: "In y = 3x + 7, what is the slope?",
+        answer: "3",
+        hint: "In y = mx + b, m is the slope — the number multiplying x.",
+      },
+      {
+        prompt: "In y = 3x + 7, what is the y-intercept?",
+        answer: "7",
+        hint: "b is the y-intercept — the number added at the end.",
+      },
+      {
+        prompt: "For y = 4x + 1, what is y when x = 3?",
+        answer: "13",
+        hint: "Substitute x = 3: y = 4(3) + 1.",
+      },
+    ],
+  },
+
+  "g8-u4-systems-of-linear-equations": {
+    explanation:
+      "A system of linear equations is just two line equations considered together, and \"solving\" the system means finding the point (x, y) where both lines are true at the same time — which is exactly where the two lines cross on a graph. If two friends start at different savings amounts but save different amounts weekly, the system tells you exactly when (if ever) they'll have the same amount of money.",
+    example: {
+      steps: [
+        "Solve the system: y = x + 2 and y = 3x − 4.",
+        "Since both equal y, set them equal to each other: x + 2 = 3x − 4.",
+        "Solve for x: 2 + 4 = 3x − x → 6 = 2x → x = 3.",
+        "Substitute back: y = 3 + 2 = 5. The solution is (3, 5), where the two lines cross.",
+      ],
+    },
+    visual: { type: "coordinate-plane", props: { points: [{ x: 3, y: 5, label: "Solution" }], line: true } },
+    practice: [
+      {
+        prompt: "What does the solution to a system of two linear equations represent on a graph?",
+        choices: ["The y-intercept", "The point where the lines cross", "The slope"],
+        answer: "The point where the lines cross",
+        hint: "A solution must satisfy both equations — that only happens at the intersection point.",
+      },
+      {
+        prompt: "Solve: y = x + 1 and y = 2x − 1. What is x?",
+        answer: "2",
+        hint: "Set x + 1 = 2x - 1, then solve for x.",
+      },
+      {
+        prompt: "If two lines in a system are parallel (same slope, different intercepts), how many solutions does the system have?",
+        answer: "0",
+        hint: "Parallel lines never cross, so they share no solution point.",
+      },
+    ],
+  },
+
+  "g8-u5-cylinders-and-cones": {
+    explanation:
+      "A cylinder is like a stack of identical circles (think of a soup can), and a cone comes to a point (think of an ice cream cone). Both volume formulas start with the area of the circular base, πr², then account for height: a cylinder's volume is simply base area times height (V = πr²h), while a cone — because it tapers to a point — holds exactly one-third of the cylinder with the same base and height (V = ⅓πr²h).",
+    example: {
+      steps: [
+        "A cylindrical can has radius 3 cm and height 10 cm. Find its volume.",
+        "Formula: V = πr²h.",
+        "V = π × 3² × 10 = π × 9 × 10 = 90π.",
+        "Using π ≈ 3.14: V ≈ 282.6 cm³.",
+      ],
+    },
+    visual: { type: "solid", props: { shape: "cylinder", radius: 3, height: 10, unit: "cm" } },
+    practice: [
+      {
+        prompt: "A cone has the same base radius and height as a cylinder. The cone's volume is what fraction of the cylinder's volume?",
+        answer: "1/3",
+        hint: "A cone always holds exactly one-third of the matching cylinder's volume.",
+      },
+      {
+        prompt: "Find the volume of a cylinder with radius 2 cm and height 5 cm, using π ≈ 3.14. (round to 1 decimal)",
+        answer: "62.8",
+        hint: "V = πr²h = 3.14 × 2² × 5.",
+      },
+      {
+        prompt: "Which formula gives the volume of a cone with radius r and height h?",
+        choices: ["πr²h", "⅓πr²h", "2πrh"],
+        answer: "⅓πr²h",
+        hint: "A cone is one-third the volume of a cylinder with the same base and height.",
+      },
+    ],
+  },
+
+  "g8-u6-does-this-predict-that": {
+    explanation:
+      "When two variables tend to increase together (like study time and test scores), we say they have a positive association. When one goes up as the other goes down (like outdoor temperature and heating bills), that's a negative association. A scatter plot — dots showing pairs of values — makes these patterns visible at a glance, which helps you judge whether one variable might help predict the other, even though association doesn't always mean one causes the other.",
+    example: {
+      steps: [
+        "A scatter plot shows hours studied (x) vs. test score (y) for a class.",
+        "As you scan left to right, the dots generally trend upward.",
+        "This upward trend means: as study hours increase, test scores tend to increase too.",
+        "Conclusion: there is a positive association between study time and test scores.",
+      ],
+    },
+    visual: { type: "dot-plot", props: { scatter: true, trend: "positive" } },
+    practice: [
+      {
+        prompt: "If a scatter plot shows dots trending downward left to right, what kind of association is that?",
+        choices: ["Positive", "Negative", "No association"],
+        answer: "Negative",
+        hint: "As one variable increases, the other decreases.",
+      },
+      {
+        prompt: "Does a strong association between two variables always mean one causes the other?",
+        choices: ["Yes", "No"],
+        answer: "No",
+        hint: "Association shows a pattern, but doesn't by itself prove cause and effect.",
+      },
+      {
+        prompt: "A scatter plot with dots scattered randomly, with no visible trend, shows...",
+        choices: ["Strong positive association", "Strong negative association", "No association"],
+        answer: "No association",
+        hint: "Without a visible trend up or down, there's no clear relationship.",
+      },
+    ],
+  },
+
+  "g8-u7-scientific-notation": {
+    explanation:
+      "Scientific notation is a compact way to write very large or very small numbers using powers of 10. A number like 450,000,000 becomes 4.5 × 10⁸ — much easier to read and compare. The rule: write a number between 1 and 10, then multiply by 10 raised to however many places the decimal point moved. Big numbers get positive exponents; tiny numbers (like 0.0000045) get negative exponents.",
+    example: {
+      steps: [
+        "Write 62,000 in scientific notation.",
+        "Move the decimal point so only one nonzero digit is before it: 6.2.",
+        "Count how many places you moved the decimal: 4 places to the left.",
+        "Write it as: 6.2 × 10⁴.",
+      ],
+    },
+    visual: { type: "shape", props: { shape: "exponent-tower", base: 10, exponent: 4, label: "6.2 × 10⁴" } },
+    practice: [
+      {
+        prompt: "Write 3,400 in scientific notation (format: a×10^n, e.g. 3.4x10^3).",
+        answer: "3.4x10^3",
+        hint: "Move the decimal so one digit remains before it, then count the places moved.",
+      },
+      {
+        prompt: "What is 5 × 10³ written as a regular number?",
+        answer: "5000",
+        hint: "Move the decimal point 3 places to the right.",
+      },
+      {
+        prompt: "Which number is larger: 2 × 10⁵ or 3 × 10⁴?",
+        choices: ["2 × 10⁵", "3 × 10⁴"],
+        answer: "2 × 10⁵",
+        hint: "Compare the exponents first — a bigger exponent means a much bigger number.",
+      },
+    ],
+  },
+
+  "g8-u8-the-pythagorean-theorem": {
+    explanation:
+      "The Pythagorean theorem relates the three sides of a right triangle: if a and b are the two shorter sides (legs) and c is the longest side (the hypotenuse, opposite the right angle), then a² + b² = c². Visually, this means the areas of the two smaller squares built on the legs add up exactly to the area of the square built on the hypotenuse. It's incredibly useful for finding a missing side whenever you know the other two — like finding the shortest path across a rectangular field.",
+    example: {
+      steps: [
+        "A right triangle has legs of length 3 and 4. Find the hypotenuse.",
+        "Apply the formula: a² + b² = c².",
+        "3² + 4² = 9 + 16 = 25.",
+        "c = √25 = 5. The hypotenuse is 5 units long.",
+      ],
+    },
+    visual: { type: "pythagoras", props: { a: 3, b: 4, c: 5 } },
+    practice: [
+      {
+        prompt: "A right triangle has legs 6 and 8. What is the length of the hypotenuse?",
+        answer: "10",
+        hint: "6² + 8² = 36 + 64 = 100. Take the square root.",
+      },
+      {
+        prompt: "A right triangle has a hypotenuse of 13 and one leg of 5. What is the other leg?",
+        answer: "12",
+        hint: "13² − 5² = 169 − 25 = 144. Take the square root of 144.",
+      },
+      {
+        prompt: "The Pythagorean theorem applies to which kind of triangle?",
+        choices: ["Any triangle", "Only right triangles", "Only equilateral triangles"],
+        answer: "Only right triangles",
+        hint: "The theorem depends on there being a 90° angle.",
+      },
+    ],
+  },
+};
