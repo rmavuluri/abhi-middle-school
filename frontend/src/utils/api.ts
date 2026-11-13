@@ -1,5 +1,10 @@
 import type { AlternateExplanation, LessonContent } from "../types";
 
+// In dev, Vite proxies "/api" to the local backend (see vite.config.ts).
+// In production (e.g. Netlify), there's no co-located backend, so this must
+// point at the deployed backend's URL.
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
+
 interface GenerateArgs {
   subtopicId: string;
   grade: number;
@@ -10,7 +15,7 @@ interface GenerateArgs {
 export async function fetchGeneratedContent(
   args: GenerateArgs
 ): Promise<{ content: LessonContent; cached: boolean }> {
-  const res = await fetch("/api/generate", {
+  const res = await fetch(`${API_BASE}/api/generate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(args),
@@ -31,7 +36,7 @@ interface ExplainDifferentlyArgs extends GenerateArgs {
 export async function fetchAlternateExplanation(
   args: ExplainDifferentlyArgs
 ): Promise<{ alternate: AlternateExplanation; index: number; totalAlternates: number; cached: boolean }> {
-  const res = await fetch("/api/explain-differently", {
+  const res = await fetch(`${API_BASE}/api/explain-differently`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(args),

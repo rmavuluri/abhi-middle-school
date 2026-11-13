@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: math-concept-explorer-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-haiku-5-5
+      - key: FRONTEND_URL
+        sync: false

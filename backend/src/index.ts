@@ -8,7 +8,10 @@ import {
 import { getBase, setBase, getAlternates, addAlternate } from "./cache.js";
 
 const app = express();
-app.use(cors());
+// Comma-separated list of allowed origins (e.g. your Netlify site URL).
+// Defaults to "*" for easy local/dev use; lock this down in production.
+const allowedOrigins = process.env.FRONTEND_URL?.split(",").map((s) => s.trim());
+app.use(cors({ origin: allowedOrigins && allowedOrigins.length > 0 ? allowedOrigins : "*" }));
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => {
